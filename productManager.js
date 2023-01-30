@@ -1,14 +1,5 @@
-class Product {
-  constructor(id, title, desc, price, thumb, code, stock) {
-    (this.id = id),
-      (this.title = title),
-      (this.description = desc),
-      (this.price = price),
-      (this.thumbnail = thumb),
-      (this.code = code),
-      (this.stock = stock);
-  }
-}
+// Import Product definition
+const Product = require('./modules/product');
 
 class ProductManager {
   #idControl;
@@ -19,13 +10,10 @@ class ProductManager {
 
   // Check if Product code already exist in array
   existProduct = (code) => {
-    let status = false;
-    this.products.forEach((product) => {
-      if (product.code === code) {
-        status = true;
-      }
+    const checkExist = this.products.some(function (product) {
+      return product.code === code;
     });
-    return status;
+    return checkExist;
   };
 
   // Add a product checking if the code exist or not
