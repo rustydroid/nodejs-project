@@ -1,0 +1,24 @@
+{
+  "name": "nodejsproject",
+  "version": "1.0.0",
+  "description": "NodeJS Project",
+  "main": "Clase5.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustydroid/nodejs-project.git"
+  },
+  "keywords": [],
+  "author": "Marcelo Cardozo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rustydroid/nodejs-project/issues"
+  },
+  "homepage": "https://github.com/rustydroid/nodejs-project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
+  }
+}
