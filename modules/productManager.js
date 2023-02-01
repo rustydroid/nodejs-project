@@ -1,5 +1,5 @@
 // Import Product definition
-const Product = require("./modules/product");
+const Product = require("./product");
 const fs = require("fs");
 
 class ProductManager {
@@ -9,8 +9,8 @@ class ProductManager {
     this.products = [];
     this.encoding = "utf-8";
     this.pathDir = "./db";
-    this.path = this.pathDir + "/products.json";
-    // this.path = "./products.json";
+    // this.path = this.pathDir + "/products.json";
+    this.path = "./products.json";
     this.fileReaded = false;
   }
 
@@ -126,6 +126,17 @@ class ProductManager {
     console.log(this.products);
   };
 
+  // Delete product by id
+  deleteProduct = async (id) => {
+    await this.readProducts();
+    const productsFiltered = this.products.filter((product) => {
+      if (product.id !== id) return product;
+    });
+    this.products = productsFiltered;
+    console.log(`Product with id ${id} deleted`);
+    await this.saveProducts();
+  };
+
   // Search if Product id exist in array, if not return a message
   getProductById = (id) => {
     fs.access(this.path, (err) => {
@@ -147,53 +158,6 @@ class ProductManager {
       }
     });
   };
-
-  //
 }
 
-// TESTING
-
-// New ProductManager instance
-let productManager = new ProductManager();
-
-// Calling addProduct with dummy data
-productManager.addProduct(
-  "producto prueba",
-  "Este es un producto prueba",
-  200,
-  "Sin imagen",
-  "abc123",
-  25
-);
-// 2d call addProduct just for testing
-productManager.addProduct(
-  "producto prueba",
-  "Este es un producto prueba",
-  200,
-  "Sin imagen",
-  "abc333",
-  25
-);
-
-// Calling getProducts to get the products added
-productManager.getProducts();
-
-// Calling addProduct with same dummy data as first call
-// returning "Codigo duplicado"
-productManager.addProduct(
-  "producto prueba",
-  "Este es un producto prueba",
-  200,
-  "Sin imagen",
-  "abc123",
-  25
-);
-
-// Search by Product id - Return a product
-productManager.getProductById(0);
-// Search by Product id - Return error "Producto Inexistente"
-productManager.getProductById(5);
-
-// Modify a product based on id
-productManager.updateProduct(1, { title: "Nuevo Libro", price: 5000 });
-
+module.exports = ProductManager;
